@@ -1,0 +1,40 @@
+{
+  "name": "cls-named-logger",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "env $(cat test.env | xargs) mocha",
+    "lint": "eslint .",
+    "nsp": "nsp check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plan3/cls-named-logger.git"
+  },
+  "keywords": [
+    "cls",
+    "logger"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/plan3/cls-named-logger/issues"
+  },
+  "homepage": "https://github.com/plan3/cls-named-logger#readme",
+  "dependencies": {
+    "cls-bluebird": "2.0.1",
+    "continuation-local-storage": "3.2.0",
+    "debug": "2.6.8"
+  },
+  "devDependencies": {
+    "bluebird": "3.5.0",
+    "chai": "4.1.0",
+    "eslint": "4.2.0",
+    "eslint-config-vgno": "7.0.0",
+    "eslint-plugin-promise": "3.5.0",
+    "mocha": "3.4.2",
+    "nsp": "2.6.3",
+    "proxyquire": "1.8.0"
+  }
+}
