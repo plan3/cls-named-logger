@@ -36,3 +36,6 @@ clsNamespace.run(function() {
 It will append custom CLS namespace values to the end of the message. In :point-up: example it will be:
 
 `Some message [customArg=123]`
+
+It exposes the same log levels as console, which are:
+`['log', 'info', 'debug', 'trace', 'warn', 'error']`
