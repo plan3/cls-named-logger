@@ -35,28 +35,6 @@ const getDefaultNamespace = function() {
     return defaultNamespace;
 };
 
-/**
- * @typedef {Object} Logger
- * @property {Function} log
- * @property {Function} info
- * @property {Function} debug
- * @property {Function} trace
- * @property {Function} warn
- * @property {Function} error
- */
-
-/**
- * @typedef {Function} DebugLogger
- * @param {string} debugNs
- * @property {Object} clsNs
- * @returns {Logger}
- */
-
-/**
- * @param {Function} debugFnc
- * @param {Object} clsNs
- * @param {...string} msg
- */
 const clsLog = function(debugFnc, clsNs, ...msg) {
     if (clsNs.active && typeof clsNs.active === 'object') {
         Object.keys(clsNs.active).forEach((key) => {
