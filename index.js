@@ -45,12 +45,22 @@ const clsLog = function(debugFnc, clsNs, ...msg) {
     debugFnc(...msg);
 };
 
+const validateNs = (ns) => {
+    if (ns) {
+        if (typeof ns !== 'object' || (ns.active !== null && typeof ns.active !== 'object')) {
+            throw new Error('Passed namespace should be a CLS namespace object');
+        }
+    }
+};
+
 /**
  * @param {Object} clsNs Continuation local storage namespace
  * @returns {DebugLogger}
  */
 module.exports = function(clsNs) {
-    if (typeof clsNs !== 'object' || clsNs === null) {
+    if (clsNs) {
+        validateNs(clsNs);
+    } else {
         clsNs = getDefaultNamespace();
     }
     const logger = function(debugNs) {
