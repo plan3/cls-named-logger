@@ -35,28 +35,6 @@ const getDefaultNamespace = function() {
     return defaultNamespace;
 };
 
-/**
- * @typedef {Object} Logger
- * @property {Function} log
- * @property {Function} info
- * @property {Function} debug
- * @property {Function} trace
- * @property {Function} warn
- * @property {Function} error
- */
-
-/**
- * @typedef {Function} DebugLogger
- * @param {string} debugNs
- * @property {Object} clsNs
- * @returns {Logger}
- */
-
-/**
- * @param {Function} debugFnc
- * @param {Object} clsNs
- * @param {...string} msg
- */
 const clsLog = function(debugFnc, clsNs, ...msg) {
     if (clsNs.active && typeof clsNs.active === 'object') {
         Object.keys(clsNs.active).forEach((key) => {
@@ -67,12 +45,22 @@ const clsLog = function(debugFnc, clsNs, ...msg) {
     debugFnc(...msg);
 };
 
+const validateNs = (ns) => {
+    if (ns) {
+        if (typeof ns !== 'object' || (ns.active !== null && typeof ns.active !== 'object')) {
+            throw new Error('Passed namespace should be a CLS namespace object');
+        }
+    }
+};
+
 /**
  * @param {Object} clsNs Continuation local storage namespace
  * @returns {DebugLogger}
  */
 module.exports = function(clsNs) {
-    if (typeof clsNs !== 'object' || clsNs === null) {
+    if (clsNs) {
+        validateNs(clsNs);
+    } else {
         clsNs = getDefaultNamespace();
     }
     const logger = function(debugNs) {
