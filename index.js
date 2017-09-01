@@ -60,6 +60,7 @@ const validateNs = (ns) => {
 module.exports = function(clsNs) {
     if (clsNs) {
         validateNs(clsNs);
+        clsNs = prepareNamespace(clsNs);
     } else {
         clsNs = getDefaultNamespace();
     }
