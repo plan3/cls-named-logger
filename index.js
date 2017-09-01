@@ -19,18 +19,11 @@ function patchBluebird(clsNamespace) {
     }
 }
 
-function prepareNamespace(clsNamespaceName) {
-    const clsNamespace = cls.createNamespace(clsNamespaceName);
-    patchBluebird(clsNamespace);
-
-    return clsNamespace;
-}
-
 const DEFAULT_NAMESPACE_NAME = 'cls';
 let defaultNamespace = null;
 const getDefaultNamespace = function() {
     if (defaultNamespace === null) {
-        defaultNamespace = prepareNamespace(DEFAULT_NAMESPACE_NAME);
+        defaultNamespace = cls.createNamespace(DEFAULT_NAMESPACE_NAME);
     }
     return defaultNamespace;
 };
@@ -60,10 +53,10 @@ const validateNs = (ns) => {
 module.exports = function(clsNs) {
     if (clsNs) {
         validateNs(clsNs);
-        clsNs = prepareNamespace(clsNs);
     } else {
         clsNs = getDefaultNamespace();
     }
+    patchBluebird(clsNs);
     const logger = function(debugNs) {
         const debugFnc = debugFactory(debugNs);
         const loggerObj = {};
